@@ -15,7 +15,7 @@ namespace Euler
             var watch = new Stopwatch();
             watch.Start();
 
-            var program = new Problem5();
+            var program = new Problem10();
             program.Run();
 
             watch.Stop();
