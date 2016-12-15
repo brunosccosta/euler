@@ -12,34 +12,37 @@ namespace Euler.Problems
 
         public void Run()
         {
-            long sum = 2;
-            for (int i = 3; i < _limit; i+=2)
+            var crivesize = _limit / 2;
+
+            var crive = new bool[crivesize];
+            for (int i = 0; i < crivesize; i++)
             {
-                if (IsPrime(i))
+                crive[i] = true;
+            }
+
+            var crivelimit = Math.Floor(Math.Sqrt(_limit));
+            for (int i = 0; i < crivelimit; i++)
+            {
+                if (crive[i] == true)
                 {
-                    sum += i;
+                    var n = 3 + 2 * i;
+                    for (int j = i+n; j < crivesize; j+=n)
+                    {
+                        crive[j] = false;
+                    }
+                }
+            }
+
+            long sum = 2;
+            for (int i = 0; i < crivesize; i++)
+            {
+                if (crive[i] == true)
+                {
+                    sum += 3 + 2 * i;
                 }
             }
 
             Console.WriteLine(sum);
-        }
-
-        private bool IsPrime(int n)
-        {
-            if (n < 2)
-                return false;
-
-            if (n == 2)
-                return true;
-
-            var limit = Math.Sqrt(n);
-            for (int i = 2; i <= limit; i++)
-            {
-                if (n % i == 0)
-                    return false;
-            }
-
-            return true;
         }
     }
 }
